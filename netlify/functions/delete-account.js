@@ -8,7 +8,7 @@ exports.handler = async (event, context) => {
   }
 
   try {
-    const { email } = JSON.parse(event.body);
+    const { email, password } = JSON.parse(event.body);
     
     if (!email) {
       return {
@@ -18,7 +18,19 @@ exports.handler = async (event, context) => {
           'Access-Control-Allow-Headers': 'Content-Type',
           'Access-Control-Allow-Methods': 'POST, OPTIONS'
         },
-        body: JSON.stringify({ error: 'Email is required' })
+        body: JSON.stringify({ message: 'Email is required.' })
+      };
+    }
+
+    if (!password) {
+      return {
+        statusCode: 400,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Headers': 'Content-Type',
+          'Access-Control-Allow-Methods': 'POST, OPTIONS'
+        },
+        body: JSON.stringify({ message: 'Password is required.' })
       };
     }
 
@@ -28,7 +40,7 @@ exports.handler = async (event, context) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email: email })
+      body: JSON.stringify({ email: email, password: password })
     });
 
     const data = await response.text();
