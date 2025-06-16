@@ -1,0 +1,9 @@
+{
+  "name": "upskillme-account-deletion",
+  "version": "1.0.0",
+  "description": "UpSkillMe account deletion page",
+  "main": "index.html",
+  "dependencies": {
+    "node-fetch": "^2.6.7"
+  }
+} 

@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UpSkillMe - Delete Account</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0B0E1A 0%, #1A1E2E 100%);
+            min-height: 100vh;
+            color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: linear-gradient(145deg, #1E2330 0%, #252B3D 100%);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(47, 157, 242, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #2F9DF2 0%, #50F6DE 100%);
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            background: linear-gradient(135deg, #2F9DF2 0%, #50F6DE 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #8892B0;
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        .warning-card {
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .warning-icon {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .warning-title {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: #FFC107;
+        }
+
+        .warning-text {
+            color: #CDD6F4;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #E2E8F0;
+            font-size: 14px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        input[type="email"] {
+            width: 100%;
+            padding: 16px 20px;
+            background: rgba(30, 35, 48, 0.8);
+            border: 2px solid rgba(71, 85, 105, 0.3);
+            border-radius: 12px;
+            color: #FFFFFF;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        input[type="email"]:focus {
+            border-color: #2F9DF2;
+            box-shadow: 0 0 0 3px rgba(47, 157, 242, 0.1);
+        }
+
+        input[type="email"]::placeholder {
+            color: #64748B;
+        }
+
+        .checkbox-wrapper {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #475569;
+            border-radius: 4px;
+            background: transparent;
+            cursor: pointer;
+            position: relative;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .checkbox:checked {
+            background: linear-gradient(135deg, #2F9DF2 0%, #50F6DE 100%);
+            border-color: #2F9DF2;
+        }
+
+        .checkbox:checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .checkbox-label {
+            color: #CDD6F4;
+            font-size: 14px;
+            line-height: 1.5;
+            cursor: pointer;
+        }
+
+        .delete-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .delete-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(220, 38, 38, 0.3);
+        }
+
+        .delete-btn:active {
+            transform: translateY(0);
+        }
+
+        .delete-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 8px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .message {
+            padding: 16px 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: none;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .success {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            color: #22C55E;
+        }
+
+        .error {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #EF4444;
+        }
+
+        .support-section {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(71, 85, 105, 0.3);
+        }
+
+        .support-text {
+            color: #8892B0;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .support-link {
+            color: #2F9DF2;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .support-link:hover {
+            color: #50F6DE;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 20px;
+                margin: 10px;
+            }
+
+            .logo {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-section">
+            <h1 class="logo">UpSkillMe</h1>
+            <p class="subtitle">Account Deletion Request</p>
+        </div>
+
+        <div class="warning-card">
+            <div class="warning-icon">⚠️</div>
+            <h3 class="warning-title">Permanent Action Warning</h3>
+            <p class="warning-text">
+                This action will permanently delete your account and all associated data including:
+                learning progress, badges, achievements, profile information, and course history.
+                This action cannot be undone.
+            </p>
+        </div>
+
+        <div id="successMessage" class="message success">
+            <span>✅</span>
+            <div>
+                <strong>Account deletion requested successfully!</strong><br>
+                All your data will be permanently removed within 24 hours.
+            </div>
+        </div>
+
+        <div id="errorMessage" class="message error">
+            <span>❌</span>
+            <div>
+                <strong>Error processing your request.</strong><br>
+                Please try again or contact our support team.
+            </div>
+        </div>
+
+        <form id="deleteForm">
+            <div class="form-group">
+                <label for="email">UpSkillMe Account Email</label>
+                <div class="input-wrapper">
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        required 
+                        placeholder="Enter your registered email address"
+                    >
+                </div>
+            </div>
+
+            <div class="checkbox-wrapper">
+                <input type="checkbox" id="confirm" class="checkbox" required>
+                <label for="confirm" class="checkbox-label">
+                    I understand this action is permanent and cannot be undone. 
+                    I want to permanently delete my UpSkillMe account and all associated data.
+                </label>
+            </div>
+
+            <button type="submit" class="delete-btn" id="deleteButton">
+                <span class="spinner" id="spinner"></span>
+                <span id="buttonText">Delete My Account Permanently</span>
+            </button>
+        </form>
+
+        <div class="support-section">
+            <p class="support-text">Need help or changed your mind?</p>
+            <a href="mailto:support@upskillme.ai" class="support-link">Contact Support Team</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('deleteForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const confirmCheckbox = document.getElementById('confirm').checked;
+            const deleteButton = document.getElementById('deleteButton');
+            const spinner = document.getElementById('spinner');
+            const buttonText = document.getElementById('buttonText');
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            
+            // Hide previous messages
+            successMessage.style.display = 'none';
+            errorMessage.style.display = 'none';
+            
+            if (!confirmCheckbox) {
+                alert('Please confirm that you understand this action is permanent.');
+                return;
+            }
+
+            // Show loading state
+            deleteButton.disabled = true;
+            spinner.style.display = 'inline-block';
+            buttonText.textContent = 'Processing Request...';
+
+            try {
+                const response = await fetch('/.netlify/functions/delete-account', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email: email })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    successMessage.style.display = 'flex';
+                    document.getElementById('deleteForm').style.display = 'none';
+                } else {
+                    throw new Error(data.message || 'Request failed');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                errorMessage.style.display = 'flex';
+                
+                // Reset button state
+                deleteButton.disabled = false;
+                spinner.style.display = 'none';
+                buttonText.textContent = 'Delete My Account Permanently';
+            }
+        });
+
+        // Custom checkbox styling
+        document.getElementById('confirm').addEventListener('change', function() {
+            // This handles the visual state, CSS handles the rest
+        });
+    </script>
+</body>
+</html>
